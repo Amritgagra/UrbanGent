@@ -25,15 +25,16 @@
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
-    {% comment %} <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script> {% endcomment %}
 
     {{ content_for_header }}
   <link href="{{'custom.css' |  asset_url}}" rel="stylesheet">
   <!-- Link Swiper's CSS -->
   <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' |  asset_url  }}" />
+    <!-- Alpine js -->
+  <script defer src="{{ 'alpine.js' |  asset_url}}"></script>
   </head>
 
-  <body class="template-{{}}">
+  <body class="template-{{ template.name }}">
 
     {% sections 'header' %}
 

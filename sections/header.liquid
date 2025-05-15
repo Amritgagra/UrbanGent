@@ -10,16 +10,22 @@
         <ul class="main-menu flex gap-4 mx-auto">
             {% for link in section.settings.menu.links %}
                 {% if link.links != blank %}
-                    <li class="relative">
-                        <a href="" class="text-lg font-medium inline-flex gap-1 items-center text-gray-700 hover:text-orange-400 hover:underline">
+                    <li class="relative group  text-gray-700 hover:text-orange-400 hover:underline" x-data='{open: false}'  @mouseenter="open = true"   @mouseleave="open = false">
+                        <button  class=" cursor-pointer text-lg font-medium inline-flex gap-1 items-center">
                             {{link.title}}
-                            {%  render 'chevron-down' %}
-                        </a>
-                        
-                        <ul class="absolute px-4 py-2 z-10  min-w-[140px] shadow-lg bg-white rounded">
+                            <span class="transform transition-transform duration-200 group-hover:rotate-180">{%  render 'chevron-down' %}</span>
+                        </button>                        
+                        <ul x-show='open'
+                                     x-transition:enter="transition ease-out duration-300"
+                                    x-transition:enter-start="opacity-0 translate-y-2"
+                                    x-transition:enter-end="opacity-100 translate-y-0"
+                                    x-transition:leave="transition ease-in duration-200"
+                                    x-transition:leave-start="opacity-100 translate-y-0"
+                                    x-transition:leave-end="opacity-0 translate-y-2"
+                         class="absolute transform px-4 py-2 z-10  min-w-[140px] shadow-lg bg-white rounded">
                             {% for sublink in link.links %}
                                 <li>
-                                    <a href="{{ sublink.url }}" class="text-gray-500 hover:text-orange-500 py-1 inline-flex">{{ sublink.title }}</a>
+                                    <a href="{{ sublink.url }}" class="text-gray-500 hover:text-orange-500 py-1 flex">{{ sublink.title }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -29,17 +35,18 @@
                 {% endif %}                    
             {% endfor %}
         </ul>
-        {% if shop.customer_accounts_enabled %}
-            {% if customer %}
-                {% else if %}
-                
-                <div class="flex space-x-3">
-                    <a href="{{ routes.account_url}}">{%  render 'account-icon' %}</a>
-                    <a href="{{ routes.cart_url }}">{%  render 'cart-icon' %}</a>
-                    </div>
-            {%  endif %}
-        {% endif %}
-
+        <div class="space-x-2 flex">
+            <a href="{{ routes.cart_url }}">{%  render 'cart-icon' %}</a>
+            {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                    <a class="text-gray-500 hover:text-orange-500" href="{{ routes.account_url}}">Account</a>
+                    {{ 'Log out' |  customer_logout_link |  replace: '<a','<a class="text-gray-500 hover:text-orange-500"' }}
+                    {% else %}
+                        {{ "Log in" |  customer_login_link |  replace: '<a','<a class="text-gray-500 hover:text-orange-500"' }}
+                        {{ "Register" |  customer_register_link |  replace: '<a','<a class="text-gray-500 hover:text-orange-500"' }}
+                {%  endif %}
+            {% endif %}
+        </div>
 
     </div>
 </header>
