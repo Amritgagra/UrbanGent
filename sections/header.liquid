@@ -1,0 +1,71 @@
+<header class="relative py-4 bg-gray-50">
+    <div class="px-4 flex justify-between items-center container mx-auto">
+        <a href="{{routes.root_url}}">
+        <img  width="" height=""
+          src="{{ section.settings.logo | img_url: 'master' }}" 
+          alt="{{ section.settings.logo.alt | default: 'Site Logo' }}" 
+          loading="lazy" 
+          style="max-width: 100%; height: auto;" class="w-32">
+        </a>
+        <ul class="main-menu flex gap-4 mx-auto">
+            {% for link in section.settings.menu.links %}
+                {% if link.links != blank %}
+                    <li class="relative">
+                        <a href="" class="text-lg font-medium inline-flex gap-1 items-center text-gray-700 hover:text-orange-400 hover:underline">
+                            {{link.title}}
+                            {%  render 'chevron-down' %}
+                        </a>
+                        
+                        <ul class="absolute px-4 py-2 z-10  min-w-[140px] shadow-lg bg-white rounded">
+                            {% for sublink in link.links %}
+                                <li>
+                                    <a href="{{ sublink.url }}" class="text-gray-500 hover:text-orange-500 py-1 inline-flex">{{ sublink.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a class="text-lg font-medium text-gray-700 hover:text-orange-400 hover:underline" href="{{link.url}}">{{link.title}}</a></li>
+                {% endif %}                    
+            {% endfor %}
+        </ul>
+        {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+                {% else if %}
+                
+                <div class="flex space-x-3">
+                    <a href="{{ routes.account_url}}">{%  render 'account-icon' %}</a>
+                    <a href="{{ routes.cart_url }}">{%  render 'cart-icon' %}</a>
+                    </div>
+            {%  endif %}
+        {% endif %}
+
+
+    </div>
+</header>
+
+{% schema %}
+{
+    "name": "Header",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id":"logo",
+            "label": "Site Logo"
+        },
+        {
+             "type": "text",
+            "id": "logo_alt",
+            "label": "Logo Alt Text",
+            "default": "Site Logo"
+        },
+        {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Menu",
+            "default":"main-menu"
+        }
+       
+    ]
+}
+{% endschema %}

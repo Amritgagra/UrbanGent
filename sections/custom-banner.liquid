@@ -1,0 +1,54 @@
+<div class="custom-banner">
+  <div class="container-fluid">
+    <div class="swiper banner-swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+            <div class="swiper-slide">
+              <img width="" height="" src="{{ block.settings.slide_image | img_url: 'master' }}" alt="Slide Image" loading="lazy" class="w-[100%] max-h-[calc(100vh-87px)] block object-cover object-center">
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var swiper = new Swiper(".banner-swiper", {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+      },
+      slidesPerView: 1,
+      spaceBetween: 0
+    });
+  });
+</script>
+
+
+
+{% schema %}
+{
+  "name": "Custom Banner",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "banner_slide",
+      "name": "Slide Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "slide_image",
+          "label": "Slide Img"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Custom Banner",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

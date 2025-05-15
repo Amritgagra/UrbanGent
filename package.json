@@ -1,22 +1,29 @@
 {
-  "name": "UrbanGent",
+  "name": "urbangent",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "UrbanGent is a modern Shopify theme, based on Dawn, tailored for style-forward digital storefronts.",
+  "homepage": "https://github.com/Amritgagra/UrbanGent#readme",
+  "bugs": {
+    "url": "https://github.com/Amritgagra/UrbanGent/issues"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Amritgagra/UrbanGent.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "homepage": "",
+  "author": "Your Name <you@example.com>",
+  "type": "commonjs",
+  "main": "postcss.config.js",
+  "scripts": {
+    "dev": "npx @tailwindcss/cli -i ./assets/tailwind.css -o ./assets/custom.css --watch"
+  },
   "devDependencies": {
-    "autoprefixer": "^10.3.2",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.7"
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.6"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.6",
+    "@tailwindcss/postcss": "^4.1.6"
   }
 }

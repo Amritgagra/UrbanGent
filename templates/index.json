@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "header":{
+      "type":"header"
+    },
+    "custom_banner":{
+      "type": "custom-banner"
+    }
+   },
+  "order": ["header","custom_banner"]
+}
